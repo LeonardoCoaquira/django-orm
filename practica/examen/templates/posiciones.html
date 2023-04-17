@@ -1,0 +1,18 @@
+<h1>TABLAS DE POSICIONES</h1>
+<table border="1">
+    <tr>
+        <th>Alumno</th>
+        <th>Nota</th>
+    </tr>
+    {% for nota in notas %}
+    <tr>
+        <td>
+            {{nota.alumno.nombre}}
+        </td>
+        <td>
+            {{nota.nota}}
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+<a href="{% url 'examen:index' %}">Volver a la pagina principal</a>

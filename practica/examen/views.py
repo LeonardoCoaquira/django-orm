@@ -1,6 +1,6 @@
 from django.shortcuts import render
 
-from .models import Pregunta, Opcion
+from .models import Pregunta, Opcion, Alumno, Nota
 # Create your views here.
 
 def index(request):
@@ -21,3 +21,24 @@ def resolver(request):
     }
 
     return render(request, 'resultados.html',context)
+
+def registro(request):
+    data_nota = request.POST['nota']
+    data_nombre = request.POST['nombre']
+    data_email = request.POST['email']
+
+    objAlumno = Alumno.objects.create(
+        nombre = data_nombre,
+        email = data_email
+    )
+
+    objNota = Nota()
+    objNota.alumno = objAlumno
+    objNota.nota = int(data_nota)
+    objNota.save()
+
+    context = {
+        'notas' : Nota.objects.all()
+    }
+
+    return render(request,'posiciones.html',context)
